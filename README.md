@@ -22,7 +22,11 @@ The contents of this repository are:
 directory. It runs once per day on the remote computer.
 6. scp_tar_files.py: copies the compressed files to aristotle. Because the satellite windows
 vary from day to day, the script executes once per hour on the remote computer.
-7. 
+7. copyRemoveList.py: copies DeleteFiles.txt to the remote computer. It executes once per hour because
+of shifiting satellite windows.
+8. deleteRxdsp.py: this file deletes all hours a particular day listed in DeleteFiles.txt. If an 
+hour for a particular is not listed in DeleteFiles.txt, that data file is made immutable on the remote
+machine by using chattr +i. The file is also scp'd to narya (the computer in the station), for backup storage.
 
 ##Instructions for Data Management
 1. To manage the data, log onto aristotle and navigate to
@@ -38,6 +42,8 @@ is comma-delimited with no spaces. For example, if you wanted to delete from 0-3
 following line
 2014-05-04 00,01,02,03
 
+Note: cronjobs on aristotle can be edited by typing crontab -e while logged in as canopus.
+Cronjobs on gilgalad (the remote computer) can be edited by editing /etc/crontab.
 
 
 
